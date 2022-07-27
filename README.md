@@ -393,7 +393,8 @@ customize`). The following are likely to be of most interest:
 
 - `persp-sort`: Select the order in which to sort perspectives when calling
   `persp-switch`. Defaults to `'name` (alphabetical), but `'access` (by most
-  recently accessed) and `'created` (by order created) are available. Note that
+  recently accessed), `'created` (by order created) and `'created-reversed`
+  (by order created, oldest first) are available. Note that
   `persp-switch-by-number` is likely to be confusing when this is set to
   `'access`, as the numbers associated with a perspective will change all the time.
 - `persp-interactive-completion-function`: Used for prompting for a perspective

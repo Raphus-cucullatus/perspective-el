@@ -99,11 +99,13 @@ instead of the full perspective list."
   "What order to sort perspectives.
 If 'name, then sort alphabetically.
 If 'access, then sort by last time accessed (latest first).
-If 'created, then sort by time created (latest first)."
+If 'created, then sort by time created (latest first).
+If 'created-reversed, then sort by time created (oldest first)."
   :group 'perspective-mode
   :type '(choice (const :tag "By Name"          name)
                  (const :tag "By Time Accessed" access)
-                 (const :tag "By Time Created"  created)))
+                 (const :tag "By Time Created"  created)
+                 (const :tag "By Time Created"  created-reversed)))
 
 (defcustom persp-frame-global-perspective-name "GLOBAL"
   "The name for a frames global perspective."
@@ -583,7 +585,8 @@ alphabetically. If `persp-sort' is 'access, then return them
 sorted by the last time the perspective was switched to, the
 current perspective being the first. If `persp-sort' is 'created,
 then return them in the order they were created, with the newest
-first."
+first. If `persp-sort' is 'created-reversed, then return them in
+the order they were created, with the oldest first."
   (let ((persps (hash-table-values (perspectives-hash))))
     (cond ((eq persp-sort 'name)
            (sort (mapcar 'persp-name persps) 'string<))
@@ -596,7 +599,12 @@ first."
            (mapcar 'persp-name
                    (sort persps (lambda (a b)
                                   (time-less-p (persp-created-time b)
-                                               (persp-created-time a)))))))))
+                                               (persp-created-time a))))))
+          ((eq persp-sort 'created-reversed)
+           (mapcar 'persp-name
+                   (sort persps (lambda (a b)
+                                  (time-less-p (persp-created-time a)
+                                               (persp-created-time b)))))))))
 
 (defun persp-all-names (&optional not-frame)
   "Return a list of the perspective names for all frames.

@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `persp-forget-buffer`: disassociate buffer with perspective without the risk of killing it.  This balances `persp-add-buffer`.  Newly created buffers via `get-buffer-create` are rogue buffers not found in any perspective, this function allows to get back to that state.
 - Support for using Consult's `consult-buffer` as a Perspective-aware buffer switcher.
 - `persp-merge` and `persp-unmerge`: temporarily import buffers from one perspective into another.
+- `persp-sort` now supports a new type `'created-reversed`.
 
 
 ### Changed
